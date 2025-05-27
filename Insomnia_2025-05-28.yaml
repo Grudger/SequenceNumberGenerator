@@ -1,0 +1,144 @@
+type: collection.insomnia.rest/5.0
+name: Tracking Sequence
+meta:
+  id: wrk_1c96a8f42cbc43d29b70923dda745c6d
+  created: 1748348453431
+  modified: 1748348481758
+collection:
+  - url: localhost:8080/next-tracking-number
+    name: Get Next Tracking Number
+    meta:
+      id: req_ac7aa54f42444e4dac401627d76d715f
+      created: 1748348453454
+      modified: 1748353684384
+      isPrivate: false
+      sortKey: -1748348453454
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:8080/getAll
+    name: Get All Tracking Numbers
+    meta:
+      id: req_a82e8436a43e47a8a7feb722816c41b1
+      created: 1748350797906
+      modified: 1748352964267
+      isPrivate: false
+      sortKey: -1748350797906
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:8080/create
+    name: Create Tracking Number
+    meta:
+      id: req_f763e5e118a24051896db5adcac9c32d
+      created: 1748350800268
+      modified: 1748353719465
+      isPrivate: false
+      sortKey: -1748350800268
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	
+        	"sourceCountry": "BR",
+        	"destinationCountry": "TH",
+        	"weight": "999.1",
+        	"customerId": "{% faker 'randomUUID' %}",
+        	"customerName": "{% faker 'randomNamePrefix' %} {% faker 'randomNameSuffix' %}"
+
+        	
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:8080/filter
+    name: New Request
+    meta:
+      id: req_d3e90913e882484f9f2ecd30b5822bb1
+      created: 1748359847982
+      modified: 1748360897406
+      isPrivate: false
+      sortKey: -1748359847983
+    method: GET
+    parameters:
+      - id: pair_8c07ca80202b4bb2a8eec91a3d489527
+        name: origin_country_id
+        value: MY
+        disabled: true
+      - id: pair_15a102fde0a34b109f922ea58bc695b8
+        name: destination_country_id
+        value: TH
+        disabled: true
+      - id: pair_94563b760f1e4555b827af1c7a1f1a47
+        name: weight
+        value: "0.500"
+        disabled: true
+      - id: pair_c3b0fa91fdbb4cf4b3e901a2cc5444a0
+        name: created_at
+        value: 2025-05-27 23:38:43.862398
+        disabled: true
+      - id: pair_0c030d73de0949c0a98c4a4f06c8d52b
+        name: customer_id
+        value: c3d4e5f6-a7b8-6c7d-0e1f-3a4b5c6d7e8f
+        disabled: true
+      - id: pair_60f7e5e9237b45b7bf323837985c08a2
+        name: customer_name
+        value: Akira Tanaka
+        disabled: true
+      - id: pair_a9b6607229254340bca8daeb05fe36f4
+        name: customer_slug
+        value: akira-tanaka
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_ee79ae8979fba254c147cf92bed847603e2f6f2b
+    created: 1748348453433
+    modified: 1748348453433
+environments:
+  name: Base Environment
+  meta:
+    id: env_ee79ae8979fba254c147cf92bed847603e2f6f2b
+    created: 1748348453432
+    modified: 1748348453432
+    isPrivate: false

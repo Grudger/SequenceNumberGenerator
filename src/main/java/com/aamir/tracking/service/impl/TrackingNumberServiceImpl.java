@@ -81,6 +81,68 @@ public class TrackingNumberServiceImpl implements TrackingNumberService {
     }
 
     @Override
+    public List<TrackingNumber> filterTrackingNumbers(Country originCountry, Country destinationCountry, String weight,
+                                                     String createdAt, String customerId, String customerName,
+                                                     String customerSlug) {
+        log.info("Filtering tracking numbers with criteria - originCountry: {}, destinationCountry: {}, weight: {}," +
+                        " createdAt: {}, customerId: {}, customerName: {}, customerSlug: {}",
+                originCountry, destinationCountry, weight, createdAt, customerId, customerName, customerSlug);
+
+        // Convert weight from kg to grams if provided
+        Integer weightInGrams = null;
+        if (weight != null && !weight.isEmpty()) {
+            try {
+                weightInGrams = (int) (Float.parseFloat(weight) * 1000F);
+            } catch (NumberFormatException e) {
+                log.warn("Invalid weight format: {}", weight);
+                // Return empty list for invalid weight
+                return List.of();
+            }
+        }
+
+        // Parse created at timestamp if provided
+        Timestamp createdAtTimestamp = null;
+        if (createdAt != null && !createdAt.isEmpty()) {
+            try {
+                // Try to parse as yyyy-MM-dd format
+                if (createdAt.length() == 10) { // Format: yyyy-MM-dd
+                    createdAtTimestamp = Timestamp.valueOf(createdAt + " 00:00:00");
+                } else {
+                    // Try to parse as timestamp
+                    createdAtTimestamp = Timestamp.valueOf(createdAt);
+                }
+            } catch (IllegalArgumentException e) {
+                log.warn("Invalid createdAt format: {}. Expected format: yyyy-MM-dd or yyyy-MM-dd HH:mm:ss", createdAt);
+                // Return empty list for invalid date
+                return List.of();
+            }
+        }
+
+        // Parse customer ID to UUID if provided
+        UUID customerUuid = null;
+        if (customerId != null && !customerId.isEmpty()) {
+            try {
+                customerUuid = UUID.fromString(customerId);
+            } catch (IllegalArgumentException e) {
+                log.warn("Invalid UUID format for customerId: {}", customerId);
+                // Return empty list for invalid UUID
+                return List.of();
+            }
+        }
+
+        // Execute the query with all parameters
+        return trackingNumberRepository.findByFilters(
+                originCountry,
+                destinationCountry,
+                weightInGrams,
+                createdAtTimestamp,
+                customerUuid,
+                customerName,
+                customerSlug
+        );
+    }
+
+    @Override
     public List<TrackingNumber> getAllTrackingNumbers() {
         return trackingNumberRepository.findAll();
     }

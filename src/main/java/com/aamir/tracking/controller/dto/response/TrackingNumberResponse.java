@@ -19,6 +19,7 @@ public class TrackingNumberResponse {
     private String destinationCountry;
     private String weight;
     private UUID customerId;
+    private String createdAt;
     private String customerName;
     private String customerSlug;
 
@@ -29,6 +30,7 @@ public class TrackingNumberResponse {
                 .destinationCountry(trackingNumber.getDestinationCountryId().getCode())
                 .weight(String.format(Locale.UK, "%.3f", trackingNumber.getWeight() / 1000f))
                 .customerId(trackingNumber.getCustomerId())
+                .createdAt(trackingNumber.getCreatedAt().toString())
                 .customerName(trackingNumber.getCustomerName())
                 .customerSlug(trackingNumber.getCustomerSlug())
                 .build();

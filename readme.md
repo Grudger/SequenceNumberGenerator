@@ -108,5 +108,6 @@ This application follows a layered architecture with controllers, services, and 
 
 ## Demo Collection
 The application is documented and demonstrated in the following video collection:
+[Collection](https://github.com/Grudger/SequenceNumberGenerator/blob/master/Insomnia_2025-05-28.yaml)
 
 This collection can be imported into [Insomnia client](https://app.insomnia.rest)
